@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feria Pay · II Feria Empresarial de Empoderamiento Territorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="nav">
+    <div class="contenedor nav-interior">
+      <div class="nav-marca">
+        <div class="nav-marca-icono">F</div>
+        <div class="nav-marca-texto">
+          <h1>Feria Sena</h1>
+          <p>Parque Simon Bolivar</p>
+        </div>
+      </div>
+      <button class="btn-canasta" onclick="abrirCanasta()">
+        🛒 <span>Carrito</span>
+        <span class="badge-contador" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="contenedor hero-texto">
+      <span class="eyebrow">II Feria Empresarial de Empoderamiento Territorial</span>
+      <h2>Catálogo de Productos y Reservas Directas</h2>
+      <p>Apoya a los productores locales de Arauca. Realiza tu preventa o compra de productos frescos, lácteos, delicias artesanales y pescados de la región.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GENERAL -->
+  <section class="seccion">
+    <div class="contenedor">
+      
+      <!-- BLOQUE DE PREVENTA -->
+      <div class="contenedor-preventa">
+        <span class="eyebrow">Haz tu pedido de reserva</span>
+        <h3>🚀 Productos en Preventa</h3>
+        <div class="grid-preventa" id="grid-preventa"></div>
+      </div>
+
+      <!-- BLOQUE CATÁLOGO GENERAL -->
+      <div class="seccion-encabezado">
+        <span class="eyebrow">Puestos de la Feria</span>
+        <h3>Catálogo General de Productos</h3>
+      </div>
+      <div class="grid-productos" id="grid-productos"></div>
+
+    </div>
+  </section>
+
+  <!-- OVERLAY Y CARRITO -->
+  <div class="overlay" id="overlay" onclick="cerrarCanasta()"></div>
+  <aside class="panel-canasta" id="panel-canasta">
+    <div class="panel-header">
+      <h4>Tu Carrito</h4>
+      <button class="panel-cerrar" onclick="cerrarCanasta()">✕</button>
+    </div>
+    <div class="panel-cuerpo" id="canasta-contenido"></div>
+    <div class="panel-footer" id="panel-footer" style="display: none;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+        <span style="color: var(--gris-piedra); font-weight: 600;">Total:</span>
+        <strong id="total-monto" style="font-family: var(--font-mono); font-size: 20px; color: var(--verde-profundo-2);">$0</strong>
+      </div>
+      <button class="btn btn-primario btn-full" onclick="abrirModalPago()">Proceder al Pago</button>
+    </div>
+  </aside>
+
+  <!-- MODAL PAGO Y COMPROBANTE -->
+  <div class="modal-envoltorio" id="modal-pago">
+    <div class="modal-fondo" onclick="cerrarModalPago()"></div>
+    <div class="modal">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <h4>Completar Pago</h4>
+        <button class="panel-cerrar" onclick="cerrarModalPago()">✕</button>
+      </div>
+
+      <p class="modal-nota">Cada puesto recibe el pago en su propio número. Transfiere el monto exacto a cada uno y adjunta el comprobante correspondiente.</p>
+
+      <div id="lista-pagos-puesto" class="lista-pagos-puesto"></div>
+
+      <p>Lugar de Entrega / Feria: <strong>Parque Simon Bolivar de Arauca</strong></p>
+
+      <form id="form-pago" onsubmit="confirmarPago(event)">
+        <div class="campo">
+          <label for="nombre">Nombre Completo</label>
+          <input type="text" id="nombre" required placeholder="Ej. Davidson Pérez">
+        </div>
+        <div class="campo">
+          <label for="telefono">Teléfono / WhatsApp</label>
+          <input type="tel" id="telefono" required placeholder="Ej. 310 123 4567">
+        </div>
+        <div class="campo">
+          <label for="correo">Correo Electrónico</label>
+          <input type="email" id="correo" required placeholder="ejemplo@correo.com">
+        </div>
+
+        <div id="contenedor-comprobantes"></div>
+
+        <button type="submit" class="btn btn-primario btn-full" style="margin-top: 10px;">Enviar Comprobantes y Finalizar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
